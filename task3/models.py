@@ -31,11 +31,11 @@ def insert_data(data, database='antonovao', table='move_mouse'):
     client.insert(f'{database}.{table}_buffer', [data])
 
 
-def select_data(query, database='antonovao', table='move_mouse'):
+def select_data(query):
     client = clickhouse_connect.get_client(host='localhost', username='default')
     answer = client.query(query)
     return pd.DataFrame(answer.result_set, columns=answer.column_names)
 
-def drop_table():
+def drop_table(database='antonovao', table='move_mouse'):
     client = clickhouse_connect.get_client(host='localhost', username='default')
-    client.command('DROP TABLE IF EXISTS pandas_example')
+    client.command(f'DROP TABLE IF EXISTS {database}{table}')
