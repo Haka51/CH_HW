@@ -1,7 +1,7 @@
-use test;
-drop table test.antonovao;
+use antonovao;
+drop table antonovao.test;
 
-CREATE table test.antonovao(
+CREATE table antonovao.test(
 a Decimal32(4), b String, c enum('a'=1,'b'=2,'c'=3, 'd'=4)
 ) Engine = Log()
 as select
@@ -12,13 +12,13 @@ from numbers(10000);
  
 
 select *
-from test.antonovao
+from antonovao.test
 where 1=1
 and a > 10
 and b ilike '%abs%'
 limit 10;
 
-INSERT into test.antonovao
+INSERT into antonovao.test
 select
 cast(randUniform(0,1000) as Decimal32(4)) a,
 randomPrintableASCII(randUniform(5,10)) b,
@@ -26,13 +26,13 @@ randomPrintableASCII(randUniform(5,10)) b,
 from numbers(10000);
 
 select *
-from test.antonovao
+from antonovao.test
 where 1=1
 and a > 10
 and b ilike '%abs%'
 limit 10;
 
-INSERT into test.antonovao
+INSERT into antonovao.test
 select
 14 a,
 'sdanihuabssadi' b,
